@@ -83,12 +83,29 @@ getItem: function(itemId, callback) {
     query: 'SELECT * FROM root r WHERE r.id = @id',
     parameters: [{ name: '@id', value: itemId }]
     };
-
+    console.log(itemId);
     self.client.queryDocuments(self.collection._self, querySpec).toArray(function(err, results) {
     if (err) {
         callback(err);
     } else {
+        console.log(results[0]);
         callback(null, results[0]);
+    }
+    });
+},
+searchItem: function(itemId, callback) {
+    let self = this;
+    let querySpec = {
+    query: 'SELECT * FROM root r WHERE r.id = @id',
+    parameters: [{ name: '@id', value: itemId.name }]
+    };
+    console.log(itemId);
+    self.client.queryDocuments(self.collection._self, querySpec).toArray(function(err, results) {
+    if (err) {
+        callback(err);
+    } else {
+        console.log(results[0]);
+        callback(null, results);
     }
     });
 }

@@ -1,5 +1,6 @@
 let DocumentDBClient = require('documentdb').DocumentClient;
 let async = require('async');
+let jsalert = require('js-alert');
 
 function TaskList(taskModel) {
 this.taskModel = taskModel;
@@ -23,7 +24,7 @@ TaskList.prototype = {
      if (err) {
          throw err;
      }
-
+     console.log(items);
      res.render('index', {
          title: 'My ToDo List ',
          tasks: items
@@ -67,6 +68,27 @@ TaskList.prototype = {
          }
      }
      );
+ },
+search: function(req, res) {
+     let self = this;
+     let item = req.body;
+     console.log(item);
+     self.taskModel.searchItem(item, function(err,out) {
+     if (err) {
+         throw err;
+     }
+     //alert(out[0].name);
+     //res.redirect('/');
+     //console.log("--------------------");
+     console.log(out);
+     
+     res.render('index', {
+         title: 'My ToDo List ',
+         tasks: out
+     });
+     //res.redirect('/');
+     });
+
  }
  };
 

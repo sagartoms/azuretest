@@ -34,6 +34,7 @@ taskModel.init();
 app.get('/', taskList.showTasks.bind(taskList));
 app.post('/addtask', taskList.addTask.bind(taskList));
 app.post('/completetask', taskList.completeTask.bind(taskList));
+app.post('/search', taskList.search.bind(taskList));
 app.set('view engine', 'jade');
 
 // catch 404 and forward to error handler
